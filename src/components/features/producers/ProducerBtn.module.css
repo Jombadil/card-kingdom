@@ -1,0 +1,85 @@
+.producerBtn {
+    width: 350px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
+    border: 1px solid lightgray;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.producerBtn:hover {
+    background-color: #e5e5e5;
+}
+
+.producerBtn.enabled {
+    background-color: white;
+}
+
+.producerBtn.disabled {
+    background-color: gray;
+}
+
+.producerBtnGuts {
+    display: flex;
+    align-items: center;
+}
+
+.producerIcon {
+    width: 70px;
+    height: 70px;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.producerInfo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 10px;
+}
+
+.producerName {
+    font-size: 1.1em;
+    color: black;
+    margin: 0;
+    font-weight: bold
+}
+
+.producerCost {
+    font-size: 1em;
+    color: black;
+    margin: 0;
+}
+
+.producerCount {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: black;
+    margin: 0;
+    font-weight: bold;
+}
+
+.noclick {
+    pointer-events: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  

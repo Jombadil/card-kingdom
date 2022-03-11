@@ -1,0 +1,82 @@
+.card {
+    width: 110px;
+    height: 160px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flipCard {
+    background-color: transparent;
+    width: 110px;
+    height: 160px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flipCardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flipCard:hover .flipCardInner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flipCardFront, .flipCardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flipCardFront {
+    background-color: #bbb;
+    color: black;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  /* Style the back side */
+  .flipCardBack {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+.cardFront {
+    color: black;
+    background-color: lawngreen;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cardBack {
+    background-color: hotpink;
+    color: white;
+    transform: rotateY(180deg)
+}
+
+
+
+
+  /* POKER CARD */
+.floatingPokerCard {
+  position: absolute;
+}
