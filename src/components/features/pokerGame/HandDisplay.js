@@ -17,8 +17,9 @@ export default function HandDisplay() {
   })
 
   return (
+    <>
+    <input id={`dealerToggle`} type='checkbox' onChange={() => handleDealerToggleClick(dispatch)}/>
     <div className={styles.pokerPane}>
-      <input id={`dealerToggle`} type='checkbox' onChange={() => handleDealerToggleClick(dispatch)}/>
 
       {currentHand.length === 5 && 
         <div className={styles.overlay}>
@@ -28,6 +29,7 @@ export default function HandDisplay() {
       
       <div className={`${styles.handWindow}`}>{currentHandCards}</div>
     </div>
+    </>
     
   )
 }
