@@ -7,6 +7,9 @@ export const pokerGameSlice = createSlice({
     name: "pokerGameSlice",
     initialState: initialPokerGame,
     reducers: {
+      dealerToggle: (state) => {
+        state.dealerToggle = !state.dealerToggle
+      },
       addCardToHand: (state, action) => {
         state.currentHand.push(action.payload)
       },
@@ -32,6 +35,6 @@ export const pokerGameSlice = createSlice({
 // Exports ///////////////////////////////////////
 
 export const selectPokerGame = (state) => state.pokerGame;
-export const { addCardToHand, resetHand, addCardToCardsDealt, resetCardsDealt, addCardToCurrentDealtCards, removeCardToCurrentDealtCards } = pokerGameSlice.actions;
+export const { dealerToggle, addCardToHand, resetHand, addCardToCardsDealt, resetCardsDealt, addCardToCurrentDealtCards, removeCardToCurrentDealtCards } = pokerGameSlice.actions;
 
 export default pokerGameSlice.reducer;

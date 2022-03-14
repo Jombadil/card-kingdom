@@ -1,0 +1,50 @@
+.modalWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(20, 20, 20, .7);
+    z-index: 1000;
+}
+
+.modalWindow {
+    min-width: 25%;
+    min-height: 25%;
+    max-width: 75%;
+    max-height: 75%;
+    background-color: aliceblue;
+    z-index: 1010;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    padding: 25px;
+    color: black;
+    font-size: 2em;
+    text-align: center;
+}
+
+.content {
+    flex: 1;
+    color: rgb(82, 82, 82);
+    font-size: 1em;
+}
+
+.footer {
+    width: 100%;
+    padding: 25px;
+    text-align: center;
+}

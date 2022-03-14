@@ -25,13 +25,17 @@ export const PokerCard = ({backgroundImage, id}) => {
   )
 }
 
-export const FlipableCard = () => {
+export const FlipableCard = ({frontChildren, backChildren}) => {
   return (
     <div className={`${CardStyles.flipCard} ${styles.noselect}`}>
       <div className={`${CardStyles.flipCardInner}`}>
-        <div className={`${CardStyles.flipCardFront}`}></div>
-        <div className={`${CardStyles.flipCardBack}`}></div>
+        <div className={`${CardStyles.flipCardFront}`}>{frontChildren}</div>
+        <div className={`${CardStyles.flipCardBack}`}>{backChildren}</div>
       </div>
     </div>
   )
+}
+
+export const DeckCard = ({front, back}) => {
+  return <FlipableCard frontChildren={front} backChildren={back} />
 }

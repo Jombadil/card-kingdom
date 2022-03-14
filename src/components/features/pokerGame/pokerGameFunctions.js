@@ -15,8 +15,6 @@ export function getPlayingCardName(card) {
 
 export function scorePokerHand(currentHand) {
 
-    let returnObj;
-
     let handSplit = []; // array of arrays containing [value, suit]
     let handValues = []; // array of hand values
     let handSuits = []; // array of hand suits
@@ -25,20 +23,30 @@ export function scorePokerHand(currentHand) {
     let dupe1Amount, dupe2Amount; // collect value repeats ... there can only be 2 pairs
     
     //CARD PAYOUTS                       //SUIT PAYOUTS
-    let RFbaseCardPayout  = 100000;      let RFbaseSuitPayout = 1000;
-    let SFbaseCardPayout  = 50000;       let SFbaseSuitPayout = 500;
-    let K4baseCardPayout  = 35000;       let K4baseSuitPayout = 100;
-    let FHbaseCardPayout  = 15000;       let FHbaseSuitPayout = 25;
-    let FbaseCardPayout   = 15000;       let FbaseSuitPayout  = 25;
-    let SbaseCardPayout   = 10000;       let SbaseSuitPayout  = 20;
-    let K3baseCardPayout  = 5000;        let K3baseSuitPayout = 15;     let k3value;
-    let P2baseCardPayout  = 2000;        let P2baseSuitPayout = 10;
-    let PbaseCardPayout   = 1000;        let PbaseSuitPayout  = 5;
-    let HbaseCardPayout   = 500;         let HbaseSuitPayout  = 2;      let highest = 0;
+    const RFbaseCardPayout  = 100000;      const RFbaseSuitPayout = 1000;
+    const SFbaseCardPayout  = 50000;       const SFbaseSuitPayout = 500;
+    const K4baseCardPayout  = 35000;       const K4baseSuitPayout = 100;
+    const FHbaseCardPayout  = 15000;       const FHbaseSuitPayout = 25;
+    const FbaseCardPayout   = 15000;       const FbaseSuitPayout  = 25;
+    const SbaseCardPayout   = 10000;       const SbaseSuitPayout  = 20;
+    const K3baseCardPayout  = 5000;        const K3baseSuitPayout = 15;     let k3value;
+    const P2baseCardPayout  = 2000;        const P2baseSuitPayout = 10;
+    const PbaseCardPayout   = 1000;        const PbaseSuitPayout  = 5;
+    const HbaseCardPayout   = 500;         const HbaseSuitPayout  = 2;      let highest = 0;
 
 
     let cardPayout = 0;
     let suitPayout = 0;
+    let payoutSuits = [];
+    let msg = '';
+
+    // FINAL REWARD OBJECT
+    let rewardObj = {
+        hand: currentHand, 
+        cardAmount: cardPayout, 
+        suitAmount: suitPayout, 
+        suits: payoutSuits
+    }
 
     if (currentHand.length === 5) { // CHECK TO SEE IF YOU HAVE 5 CARDS
         
@@ -187,50 +195,45 @@ export function scorePokerHand(currentHand) {
         function royalFlushPayout() {
             cardPayout = Math.floor(RFbaseCardPayout * dealerMultiplier());         // Card Payout
             suitPayout = Math.floor(RFbaseSuitPayout * dealerMultiplier());         // Suit Payout
-
-            const suit = handSplit[0][1];
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: [suit], msg: `You got a Royal Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${suit}`}
-            return returnObj
+            payoutSuits = [handSplit[0][1]];
+            msg = `You got a Royal Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${payoutSuits[0]}`
+            return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
         // STRAIGHT FLUSH
         function straightFlushPayout() {
             cardPayout = Math.floor(SFbaseCardPayout * dealerMultiplier());         // Card Payout
             suitPayout = Math.floor(SFbaseSuitPayout * dealerMultiplier());         // Suit Payout
-            
-            const suit = handSplit[0][1];
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: [suit], msg: `You got a Straight Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${suit}`}
-            return returnObj
+            payoutSuits = handSplit[0][1];
+            msg = `You got a Straight Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${payoutSuits}`
+            return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
         // FOUR OF A KIND
         function fourOfKindPayout() {
             cardPayout = Math.floor(K4baseCardPayout * dealerMultiplier());         // Card Payout
             suitPayout = Math.floor(K4baseSuitPayout * dealerMultiplier());         // Suit Payout
-
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: ['diamonds', 'hearts', 'clubs', 'spades'], msg: `You got a Four of a Kind! Your payout is ${cardPayout} Cards & ${suitPayout} of each suit.`}
-            return returnObj
+            payoutSuits = ['diamonds', 'hearts', 'clubs', 'spades'];
+            msg = `You got a Four of a Kind! Your payout is ${cardPayout} Cards & ${suitPayout} of each suit.`;
+            return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
         // FULLHOUSE
         function fullHousePayout() {
             cardPayout = Math.floor(FHbaseCardPayout * dealerMultiplier());         // Card Payout
             suitPayout = Math.floor(FHbaseSuitPayout * dealerMultiplier());         // Suit Payout
-
-            let suits = [];
-            for (let i = 0; i < handSplit.length; i++) { suits.push(handSplit[i][1]) }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got a Full House! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            for (let i = 0; i < handSplit.length; i++) { payoutSuits.push(handSplit[i][1]) }; // Suits to Payout
+            msg = `You got a Full House! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`;
+            return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
         // FLUSH
         function flushPayout() {
             cardPayout = Math.floor(FbaseCardPayout * dealerMultiplier());         // Card Payout
             suitPayout = Math.floor(FbaseSuitPayout * dealerMultiplier());         // Suit Payout
-
-            const suit = handSplit[0][1];
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: [suit], msg: `You got a Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${suit}`}
-            return returnObj
+            payoutSuits = handSplit[0][1];
+            msg = `You got a Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${payoutSuits}`;
+            return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
         // STRAIGHT
@@ -240,8 +243,8 @@ export function scorePokerHand(currentHand) {
 
             let suits = [];
             for (let i = 0; i < handSplit.length; i++) { suits.push(handSplit[i][1]) }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got a Straight! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            rewardObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got a Straight! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
+            return rewardObj
         }
 
         // THREE OF A KIND
@@ -253,8 +256,8 @@ export function scorePokerHand(currentHand) {
             for (let i = 0; i < handSplit.length; i++) { 
                 if (handSplit[i][0] === k3value) { suits.push(handSplit[i][1]) } 
             }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got Three of a Kind! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            rewardObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got Three of a Kind! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
+            return rewardObj
         }
 
         // TWO PAIR
@@ -266,8 +269,8 @@ export function scorePokerHand(currentHand) {
             for (let i = 0; i < handSplit.length; i++) { 
                 if (handSplit[i][0] === dupe1Amount[0] || handSplit[i][0] === dupe2Amount[0]) { suits.push(handSplit[i][1]) } 
             }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got Two Pair! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            rewardObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got Two Pair! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
+            return rewardObj
         }
 
         // PAIR
@@ -279,8 +282,8 @@ export function scorePokerHand(currentHand) {
             for (let i = 0; i < handSplit.length; i++) { 
                 if (handSplit[i][0] === dupe1Amount[0]) { suits.push(handSplit[i][1]) } 
             }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got a Pair! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            rewardObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `You got a Pair! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
+            return rewardObj
         }
 
         // HIGH CARD
@@ -292,8 +295,20 @@ export function scorePokerHand(currentHand) {
             for (let i = 0; i < handSplit.length; i++) { 
                 if (handSplit[i][0] === highest) { suits.push(handSplit[i][1]) } 
             }
-            returnObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `High Card! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
-            return returnObj
+            rewardObj = {cardAmount: cardPayout, suitAmount: suitPayout, suits: suits, msg: `High Card! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`}
+            return rewardObj
+        }
+
+        function getRewardObj(cardPayout, suitPayout, payoutSuits, msg) {
+            rewardObj = {
+                header: 'Poker Payout',
+                hand: currentHand, 
+                cardAmount: cardPayout, 
+                suitAmount: suitPayout, 
+                suits: payoutSuits,
+                msg: msg
+            }
+            return rewardObj
         }
 
     } else {alert('ya need 5 cards brah')}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { handleSubmitHandClick } from '../../../actions/actions';
+import { handleDealerToggleClick, handleSubmitHandClick } from '../../../actions/actions';
 import { PLAYING_CARDS } from '../../../gameObjects/defaultPlayingCards';
 import { selectPokerGame } from '../../../reducers/pokerGameSlice'
 import { Card } from '../../Card'
@@ -18,6 +18,8 @@ export default function HandDisplay() {
 
   return (
     <div className={styles.pokerPane}>
+      <input id={`dealerToggle`} type='checkbox' onChange={() => handleDealerToggleClick(dispatch)}/>
+
       {currentHand.length === 5 && 
         <div className={styles.overlay}>
           <button className={styles.submitBtn} onClick={() => {handleSubmitHandClick(dispatch, currentHand)}}>SUBMIT HAND</button>

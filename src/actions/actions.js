@@ -1,11 +1,13 @@
 import store from '../app/store.js';
 import { addKingdomCard, checkKingdomToggleStates, setKingdomCardCost } from '../reducers/kingdomCardsSlice.js';
-import { addCardToCardsDealt, addCardToCurrentDealtCards, addCardToHand, resetHand, removeCardToCurrentDealtCards, resetCardsDealt } from '../reducers/pokerGameSlice.js';
+import { addCardToCardsDealt, addCardToCurrentDealtCards, addCardToHand, resetHand, removeCardToCurrentDealtCards, resetCardsDealt, dealerToggle } from '../reducers/pokerGameSlice.js';
 import { setTotalProducerProduction, checkProdToggleStates, addProducer, setProducerCost } from '../reducers/producersSlice.js';
 import { addCards, setCps, subtractCards } from '../reducers/recourcesSlice.js';
 import { calcProduction, currentCardAmount } from '../Utils.js';
 import { randCard, scorePokerHand } from '../components/features/pokerGame/pokerGameFunctions.js';
 import { PLAYING_CARDS } from '../gameObjects/defaultPlayingCards.js';
+import { changeModalContent, toggleModal } from '../reducers/modalSlice.js';
+import PokerRewardModal from '../components/features/pokerGame/PokerRewardModal.js';
 
 
 export const handleBigCardClick = (dispatch) => {
@@ -85,8 +87,19 @@ export const handleFloatingPokerCardClick = (dispatch, cardID, event) => {
 }
 
 export const handleSubmitHandClick = (dispatch, currentHand) => {
-    const handScoreObj = scorePokerHand(currentHand);
-    console.log(handScoreObj)
-    dispatch(addCards(handScoreObj.cardAmount))
+    const rewardObj = scorePokerHand(currentHand);
+    // console.log(rewardObj)
+    // const guts = <PokerRewardModal rewardObj={{header: 'Poker asdf', hand: ['AD', 'KD', 'QD', 'JD', 'TD']}}/>
+    // dispatch(changeModalContent({header: 'Poker asdf', content: guts}))
+    // handleModalToggle(dispatch)
+    dispatch(addCards(rewardObj.cardAmount))
     dispatch(resetHand())
+}
+
+export const handleDealerToggleClick = (dispatch) => {
+    dispatch(dealerToggle())
+}
+
+export const handleModalToggle = (dispatch) => {
+    dispatch(toggleModal())
 }

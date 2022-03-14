@@ -6,7 +6,7 @@ import HandDisplay from './features/pokerGame/HandDisplay'
 
 export default function LeftPane() {
   return (
-    <div style={{paddingBottom: '10px', width: '370px', border: '1px solid lightgray', backgroundColor: 'rgb(241, 241, 241)', boxShadow: '0 4px 8px rgba(0, 0, 0, .2)', borderRadius: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <div className='left-pane'>
         <CardDisplay />
         <BigCard />
 

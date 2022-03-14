@@ -51,3 +51,13 @@ export const commas = (num) => {
     if(isNaN(num)) return new TypeError("[INVALID_NUMBER]")
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+export const getDeckCardBG = (type) => {
+    switch (type){
+        case 'Warrior': 
+            return "url('assets/img/deck-cards/card-bg-warrior.png')"
+        case 'Healer': 
+            return "url('assets/img/deck-cards/card-bg-healer.png')"
+        default: return
+    }
+}

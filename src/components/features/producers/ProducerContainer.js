@@ -26,6 +26,6 @@ export default function ProducerContainer() {
     )
 
   return (
-    <ul className={styles.producerContainer}>{listProducers}</ul>
+    <ul className={styles.producerContainer}>{ listProducers }</ul>
   )
 }

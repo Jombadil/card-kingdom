@@ -60,3 +60,7 @@
     border-radius: 15px;
     margin-top: 60px;
 }
+
+.payout-modal-card-container {
+    display: flex;
+}
