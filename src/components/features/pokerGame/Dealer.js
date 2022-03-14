@@ -26,6 +26,7 @@ export default function Dealer() {
             <PokerCard 
               id={card.id}
               backgroundImage={card.image} 
+              style={{zIndex: '2000'}}
             />
         </div>
     })
@@ -33,7 +34,7 @@ export default function Dealer() {
   return (
     <>
       {/* <button onClick={() => dealPokerCard(dispatch)}>add</button> */}
-      <div style={{position: 'absolute'}}>{dealtCards}</div>
+      <div style={{position: 'absolute', top: 100, left: 100}}>{dealtCards}</div>
     </>
     
   )

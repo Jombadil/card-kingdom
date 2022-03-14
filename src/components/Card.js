@@ -10,8 +10,8 @@ export const Card = ({backgroundImage}) => {
 }
 
 export const PokerCard = ({backgroundImage, id}) => {
-  const xNum = Math.floor(Math.random() * 300)
-  const yNum = Math.floor(Math.random() * 200) + 300
+  const xNum = Math.floor(Math.random() * 600) + 200
+  const yNum = Math.floor(Math.random() * 100)
   return (
     <motion.div 
     id={id}

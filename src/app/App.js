@@ -26,7 +26,7 @@ function App() {
       <LeftPane />
       <RightPane />
       
-      <Dealer />
+      {/* <Dealer /> */}
       {/* <SuitDisplay /> */}
     </>
   )

@@ -3,13 +3,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { handleBigCardClick } from '../actions/actions.js';
 import { Card } from './Card.js';
+import Dealer from './features/pokerGame/Dealer.js';
 
 export default function BigCard() {
 
   const dispatch = useDispatch();
   
   return (
-      <motion.div  
+    <>
+    <motion.div  
       style={{margin: '20px'}}
       whileHover={{scale: 1.1}}
       whileTap={{scale: .9}}
@@ -17,5 +19,8 @@ export default function BigCard() {
       >
       <Card name={'Click Me!'}/>
       </motion.div>
+    <Dealer />
+    </>
+      
   )
 }
