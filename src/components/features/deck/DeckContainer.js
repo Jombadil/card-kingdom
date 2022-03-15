@@ -10,7 +10,6 @@ export default function DeckContainer() {
 
     const CardFront = ({card}) => {
         let image = getDeckCardBG(card.class)
-        console.log(image)
         return <div className={styles['card-front']} style={{backgroundImage: image}}></div>
     }
 

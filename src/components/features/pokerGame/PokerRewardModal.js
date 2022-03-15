@@ -4,6 +4,7 @@ import { Card } from '../../Card'
 
 import styles from './pokerGame.module.css'
 
+
 export default function PokerRewardModal({rewardObj}) {
     console.log(rewardObj)
 

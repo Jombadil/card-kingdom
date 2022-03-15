@@ -83,3 +83,7 @@ ul {
     align-items: center;
     cursor: pointer;
 }
+
+.tab-panel {
+    height: 100%;
+}

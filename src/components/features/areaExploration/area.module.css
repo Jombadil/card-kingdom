@@ -1,0 +1,74 @@
+.area-container {
+    display: flex;
+    padding: 25px;
+    height: 100%;
+}
+
+.battle-card-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    flex: 1;
+}
+
+.battle-card-group {
+    display: flex;
+    justify-content: center;
+}
+
+.battle-card-group > div {
+    margin: 10px;
+}
+
+.encounter-list {
+    width: 200px;
+}
+
+.card-front {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: red;
+    position: relative;
+}
+
+.status-displays {
+    width: 100%;
+    bottom: 0;
+    padding: 10px;
+    position: absolute;
+}
+
+.health-bar, .magic-bar {
+    width: 100%;
+    background-color: rgba(255, 255, 255, .3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.health-bar { height: 8px } .magic-bar { height: 5px; margin-bottom: 2px; }
+
+.status-bar-inner {
+    height: 100%;
+    width: 50%;
+    background-color: white;
+}
+
+.level-display {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: .6em;
+    border-radius: 50%;
+    overflow: hidden;
+}

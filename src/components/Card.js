@@ -39,3 +39,7 @@ export const FlipableCard = ({frontChildren, backChildren}) => {
 export const DeckCard = ({front, back}) => {
   return <FlipableCard frontChildren={front} backChildren={back} />
 }
+
+export const BattleCard = () => {
+  return <div></div>
+}
