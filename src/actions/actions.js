@@ -8,6 +8,8 @@ import { randCard, scorePokerHand } from '../components/features/pokerGame/poker
 import { PLAYING_CARDS } from '../gameObjects/defaultPlayingCards.js';
 import { changeModalContent, toggleModal } from '../reducers/modalSlice.js';
 import PokerRewardModal from '../components/features/pokerGame/PokerRewardModal.js';
+import { changeHealth, toggleFighting } from '../reducers/areaSlice.js';
+import { getTargetList, handleAttackOrder } from '../components/features/areaExploration/battleFunctions.js';
 
 
 export const handleBigCardClick = (dispatch) => {
@@ -102,4 +104,20 @@ export const handleDealerToggleClick = (dispatch) => {
 
 export const handleModalToggle = (dispatch) => {
     dispatch(toggleModal())
+}
+
+export const handleFightToggle = (dispatch) => {
+    dispatch(toggleFighting())
+}
+
+export const handleFightInterval = (dispatch, area) => {
+
+    // Get team targets in order of descending health
+    let heroes = getTargetList(area.currentHeroes)
+    let enemies = getTargetList(area.currentEncounter)
+    // Handle Team Attacks
+    
+    dispatch(changeHealth(handleAttackOrder(heroes, enemies, 'currentEncounter')))
+    // dispatch(changeHealth(handleAttackOrder(enemies, heroes, 'currentHeroes')))
+    
 }

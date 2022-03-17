@@ -1,12 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectArea } from '../../../reducers/areaSlice'
 import { getDeckCardBG } from '../../../Utils'
-import { Card, FlipableCard } from '../../Card'
+import { FlipableCard } from '../../Card'
 import styles from './area.module.css'
 
 export default function BattleCardGroup({cardGroup}) {
-  console.log(styles)
   
   const CardFront = ({card}) => {
     let image = getDeckCardBG(card.class)
@@ -22,9 +19,9 @@ export default function BattleCardGroup({cardGroup}) {
   } // HANDLING CARD COMPONENTS NEEDS TO BE REDONE
 
   const cards = cardGroup.map((card) => {
-    return <>
-    <FlipableCard key={card.id} frontChildren={<CardFront card={card} />} />
-    </>
+    return <div key={card.id}> {/* <----fix this so it is in the actual card */}
+    <FlipableCard frontChildren={<CardFront card={card} />} />
+    </div>
   })
 
   return (

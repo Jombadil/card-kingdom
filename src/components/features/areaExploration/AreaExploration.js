@@ -9,7 +9,6 @@ import styles from './area.module.css'
 
 export default function AreaExploration() {
     const area = useSelector(selectArea);
-    console.log(styles)
 
   return (
     <div className={styles['area-container']}>
