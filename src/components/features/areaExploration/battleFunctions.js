@@ -24,7 +24,10 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam) {
             
             for (let attackAttempts = 0; attackAttempts < defenseGroup.length; attackAttempts++) {
 
+                console.log(aIndex, dIndex, attackAttempts, result)
                 if (!defenseGroup[dIndex].dead) {
+
+                    console.log('attack')
 
                     let attackAmount = attackGroup[aIndex].attack.base * attackGroup[aIndex].attack.multi;
 
@@ -32,10 +35,19 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam) {
                     let targetID = defenseGroup[aIndex].id;
 
                     result.push({newHealth: newHealth, targetID: targetID})
+
+                    if (dIndex === defenseGroup.length-1) {
+                        dIndex = 0;
+                    } else {dIndex++}
                     break;
 
                 } else {
-                    dIndex = (dIndex >= defenseGroup.length) ? 0 : dIndex++;
+                    console.log(aIndex, dIndex, defenseGroup.length, attackAttempts)
+                    if (dIndex === defenseGroup.length) {
+                        dIndex = 0;
+                    } else {dIndex++}
+                    // dIndex = (dIndex === defenseGroup.length) ? 0 : dIndex++;
+                    console.log(dIndex)
                 }
             }
  
@@ -44,6 +56,8 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam) {
         }
         
     }
+
+    console.log(result)
     
     return result
 

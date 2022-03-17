@@ -50,7 +50,7 @@ export const initialArea = {
             name: 'Warrior Bob',
             class: 'Warrior',
             level: 1,
-            dead: false,
+            dead: true,
             resurectionCost: { cards: 10000, suits: { hearts: 0, spades: 0, diamonds: 0, clubs: 0 } },
             image: '',
             health: { base: 400, currentHealth: 400, multi: 1 },
