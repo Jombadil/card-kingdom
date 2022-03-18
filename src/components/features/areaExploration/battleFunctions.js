@@ -30,6 +30,7 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam) {
                     console.log('attack')
 
                     let attackAmount = attackGroup[aIndex].attack.base * attackGroup[aIndex].attack.multi;
+                    console.log(defenseGroup[aIndex].block.base * defenseGroup[aIndex].block.multi)
 
                     let newHealth = defenseGroup[aIndex].health.currentHealth - attackAmount;
                     let targetID = defenseGroup[aIndex].id;
@@ -50,58 +51,29 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam) {
                     console.log(dIndex)
                 }
             }
- 
-
             
         }
         
     }
 
     console.log(result)
-    
     return result
-
-    /* let atkI = 0
-    let defI = 0
-
-    let defenseHealthChanges = []
-    
-    // Run through attacking cards
-    for (atkI; atkI < attackGroup.length; atkI++) {
-
-        // Check if attacker card is alive
-        if (!attackGroup[atkI].dead) {
-
-            // Repeat defense target cycle if needed
-            defI = (defI > defenseGroup.length-1) ? 0 : defI; 
-
-            // Cycle through defense group
-            for (let attempts = 0; attempts < 5; attempts++) {
-                // Check if defense card is alive
-                if (!defenseGroup[defI].dead) {
-                    console.log(defenseGroup[defI])
-                    console.log(attackGroup[atkI])
-                    
-                    defenseHealthChanges.push(handleAttack(attackGroup[atkI], defenseGroup[defI]))
-                    defI++
-                    break;
-                }
-            }
-        }
-    }
-    console.log(defenseHealthChanges)
-    return defenseHealthChanges */
 }
 
 export function handleAttack(attacker, defender) {
 
     let dmg = attacker.attack.base * attacker.attack.multi;
     let block = defender.block.base * defender.block.multi;
+    let defHealth = defender.health.currentHealth;
+    let newHealth = 0;
+    let targetID = defender.id;
 
     if (dmg > block) {
-        let newHealth = defender.health.currentHealth - (attacker.attack.base - defender.block.base);
+        newHealth = defHealth - (dmg - block);
         console.log(attacker,defender)
-        return {card: defender, newHealth: newHealth}
+        return {newHealth: newHealth, targetID: targetID}
+    } else {
+        return {newHealth: 'blocked', targetID: targetID} // Maybe tie 'blocked' to a trigger for block animation
     }
     
 }

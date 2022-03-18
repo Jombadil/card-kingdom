@@ -23,19 +23,6 @@ export const areaSlice = createSlice({
           let cardIndex = teamCardGroup.findIndex((card) => card.id === action.payload[i].targetID);
           teamCardGroup[cardIndex].health.currentHealth = action.payload[i].newHealth;
         }
-        // console.log(action.payload.shift(), ' | ', action.payload)
-
-        /* console.log(action.payload)
-        for ( let i = 0; i < action.payload.length; i ++) {
-          console.log(state[`${action.payload[1]}`][0].id, action.payload[0])
-          console.log(state[`${action.payload[1]}`].findIndex((card) => card.id === action.payload[0][i].card.id))
-          let index = state[`${action.payload[1]}`].findIndex((card) => card.id === action.payload[0][i].card.id);
-          console.log(index) 
-          // state.currentEncounter[index].health.currentHealth = action.payload[0][i].newHealth
-
-        }*/
-
-        
       },
       toggleFighting: (state) => {
         state.fighting = !state.fighting;
