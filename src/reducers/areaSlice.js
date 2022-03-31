@@ -14,15 +14,21 @@ export const areaSlice = createSlice({
             completionPayout: action.payload.completionPayout
         }
       },
+      setCurrentEncounter: (state, action) => {
+        state.currentEncounter = action.payload
+      },
+      clearCurrentEncounter: (state) => {
+        state.currentEncounter = []
+      },
       changeHealth: (state, action) => {
-        let teamCardGroup = state[`${action.payload.shift()}`];
-
-        console.log(current(teamCardGroup), action.payload)
-
-        for (let i = 0; i < action.payload.length; i++) {
-          let cardIndex = teamCardGroup.findIndex((card) => card.id === action.payload[i].targetID);
-          teamCardGroup[cardIndex].health.currentHealth = action.payload[i].newHealth;
-        }
+        const teamCardGroup = state[`${action.payload.team}`];
+        const cardIndex = teamCardGroup.findIndex((card) => card.id === action.payload.id)
+        teamCardGroup[cardIndex].health.currentHealth = action.payload.newHealth;
+      },
+      toggleCardDeath: (state, action) => {
+        const teamCardGroup = state[`${action.payload.team}`];
+        const cardIndex = teamCardGroup.findIndex((card) => card.id === action.payload.id)
+        teamCardGroup[cardIndex].dead = !teamCardGroup[cardIndex].dead;
       },
       toggleFighting: (state) => {
         state.fighting = !state.fighting;
@@ -31,6 +37,6 @@ export const areaSlice = createSlice({
 });
 
 export const selectArea = (state) => state.area;
-export const { setArea, changeHealth, toggleFighting } = areaSlice.actions;
+export const { setArea, changeHealth, toggleFighting, toggleCardDeath, setCurrentEncounter, clearCurrentEncounter } = areaSlice.actions;
 
 export default areaSlice.reducer;

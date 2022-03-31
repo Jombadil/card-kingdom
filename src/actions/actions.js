@@ -8,8 +8,9 @@ import { randCard, scorePokerHand } from '../components/features/pokerGame/poker
 import { PLAYING_CARDS } from '../gameObjects/defaultPlayingCards.js';
 import { changeModalContent, toggleModal } from '../reducers/modalSlice.js';
 import PokerRewardModal from '../components/features/pokerGame/PokerRewardModal.js';
-import { changeHealth, toggleFighting } from '../reducers/areaSlice.js';
-import { getTargetList, handleAttackOrder } from '../components/features/areaExploration/battleFunctions.js';
+import { changeHealth, clearCurrentEncounter, setCurrentEncounter, toggleFighting } from '../reducers/areaSlice.js';
+import { checkTeamDeath, getTargetList, handleAttackOrder, startFightInterval } from '../components/features/areaExploration/battleFunctions.js';
+import { encounter } from '../components/features/areaExploration/testEncounter.js';
 
 
 export const handleBigCardClick = (dispatch) => {
@@ -112,12 +113,32 @@ export const handleFightToggle = (dispatch) => {
 
 export const handleFightInterval = (dispatch, area) => {
 
+    if (checkTeamDeath(area.currentEncounter)) {
+        dispatch(clearCurrentEncounter())
+        dispatch(toggleFighting())
+        return
+    }
+
     // Get team targets in order of descending health
     let heroes = getTargetList(area.currentHeroes)
     let enemies = getTargetList(area.currentEncounter)
     // Handle Team Attacks
+
+    handleAttackOrder(heroes, enemies, 'currentEncounter', dispatch)
     
-    dispatch(changeHealth(handleAttackOrder(heroes, enemies, 'currentEncounter')))
+    // dispatch(changeHealth(handleAttackOrder(heroes, enemies, 'currentEncounter', dispatch)))
     // dispatch(changeHealth(handleAttackOrder(enemies, heroes, 'currentHeroes')))
     
+}
+
+export const toggleFight = (dispatch) => {
+    dispatch(toggleFighting());
+}
+
+export const setEncounter = (dispatch, area) => {
+    dispatch(setCurrentEncounter(area.encounters[0].enemyCards))
+}
+
+export const clearEncounter = (dispatch) => {
+    dispatch(clearCurrentEncounter())
 }

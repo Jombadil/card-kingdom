@@ -224,6 +224,7 @@ export function scorePokerHand(currentHand) {
             suitPayout = Math.floor(FHbaseSuitPayout * dealerMultiplier());         // Suit Payout
             for (let i = 0; i < handSplit.length; i++) { payoutSuits.push(handSplit[i][1]) }; // Suits to Payout
             msg = `You got a Full House! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`;
+            // alert(`You got a Full House! Your payout is ${cardPayout} Cards & ${suitPayout} per suit used.`)
             return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
@@ -233,6 +234,7 @@ export function scorePokerHand(currentHand) {
             suitPayout = Math.floor(FbaseSuitPayout * dealerMultiplier());         // Suit Payout
             payoutSuits = handSplit[0][1];
             msg = `You got a Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${payoutSuits}`;
+            // alert(`You got a Flush! Your payout is ${cardPayout} Cards & ${suitPayout} ${payoutSuits}`)
             return getRewardObj(cardPayout, suitPayout, payoutSuits, msg)
         }
 
