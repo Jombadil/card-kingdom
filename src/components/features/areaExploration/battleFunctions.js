@@ -38,7 +38,7 @@ export function handleAttackOrder(attackGroup, defenseGroup, defenseTeam, dispat
     } */
 
     for (let attackerIndex = 0; attackerIndex < attackGroup.length; attackerIndex++) {
-        
+        // I think I need to use selector to get the new state inside the loop
         let attacker = attackGroup[attackerIndex];
 
         if (checkTeamDeath(defenseGroup)) {
